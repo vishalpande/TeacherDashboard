@@ -1,0 +1,78 @@
+/* AddStudent.css */
+.add-student-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.add-student-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px); /* Adjust height to allow space for navbar */
+    background: #f8f9fa;
+    padding-top: 60px; /* Ensure the content doesn't overlap the navbar */
+}
+
+.add-student-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+}
+
+.add-student-form h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.add-student-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.add-student-form .form-label {
+    font-weight: 600;
+}
+
+.add-student-form input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.add-student-form input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.add-student-form .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 0.5rem;
+}
+
+.add-student-form .btn {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-student-form .btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.add-student-form .btn:hover:enabled {
+    background-color: #218838;
+}

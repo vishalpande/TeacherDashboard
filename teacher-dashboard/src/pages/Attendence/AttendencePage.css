@@ -1,0 +1,76 @@
+/* Styling for the attendance page */
+.attendance-page {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Class selection dropdown */
+  .class-selection {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .class-selection label {
+    font-weight: bold;
+  }
+  
+  .class-selection select {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Students list */
+  .students-list {
+    margin-top: 20px;
+  }
+  
+  .students-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .student-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .attendance-options button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+  }
+  
+  .attendance-options button:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Submit button */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    background-color: #218838;
+  }
+  

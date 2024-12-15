@@ -1,0 +1,63 @@
+/* General page styling */
+.students-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures full screen height */
+  }
+  
+  /* Styling for the container where the students are listed */
+  .students-container {
+    flex: 1;
+    margin: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styling for the error message */
+  .error-message {
+    color: #d9534f;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Styling for the list of students */
+  .students-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Styling for individual student items */
+  .student-item {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover effect for student items */
+  .student-item:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Styling for student name and other details */
+  .student-item div {
+    margin: 5px 0;
+    font-size: 1.1rem;
+  }
+  
+  /* Styling for the labels (Name, Roll Number, etc.) */
+  .student-item div strong {
+    font-weight: bold;
+  }
+  
+  /* Make sure the last item has no margin */
+  .student-item:last-child {
+    margin-bottom: 0;
+  }
+  
