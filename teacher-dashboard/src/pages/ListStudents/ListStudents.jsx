@@ -3,10 +3,20 @@ import axios from 'axios';
 import './ListStudents.css';
 import Navbar from '../../components/Navbar/Navbar';
 
+const StudentItem = ({ student }) => (
+  <li key={student._id} className="student-item">
+    <div><strong>Name:</strong> {student.name}</div>
+    <div><strong>Roll Number:</strong> {student.rollNumber}</div>
+    <div><strong>Class:</strong> {student.class}</div>
+    <div><strong>Email:</strong> {student.email}</div>
+  </li>
+);
+
 const ListStudents = () => {
   const [students, setStudents] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+  const [sortField, setSortField] = useState('name'); // Default sort field
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -30,6 +40,17 @@ const ListStudents = () => {
     fetchStudents();
   }, []);
 
+  // Sorting logic
+  const handleSort = (field) => {
+    setSortField(field);
+    const sortedStudents = [...students].sort((a, b) => {
+      if (a[field] < b[field]) return -1;
+      if (a[field] > b[field]) return 1;
+      return 0;
+    });
+    setStudents(sortedStudents);
+  };
+
   return (
     <div className="students-page">
       <Navbar />
@@ -39,16 +60,26 @@ const ListStudents = () => {
         ) : error ? (
           <p className="error-message">{error}</p>
         ) : (
-          <ul className="students-list">
-            {students.map((student) => (
-              <li key={student._id} className="student-item">
-                <div><strong>Name:</strong> {student.name}</div>
-                <div><strong>Roll Number:</strong> {student.rollNumber}</div>
-                <div><strong>Class:</strong> {student.class}</div>
-                <div><strong>Email:</strong> {student.email}</div>
-              </li>
-            ))}
-          </ul>
+          <>
+            <div className="sort-container">
+              <label htmlFor="sort">Sort by:</label>
+              <select
+                id="sort"
+                value={sortField}
+                onChange={(e) => handleSort(e.target.value)}
+              >
+                <option value="name">Name</option>
+                <option value="rollNumber">Roll Number</option>
+                <option value="class">Class</option>
+                <option value="email">Email</option>
+              </select>
+            </div>
+            <ul className="students-list">
+              {students.map((student) => (
+                <StudentItem key={student._id} student={student} />
+              ))}
+            </ul>
+          </>
         )}
       </div>
     </div>
