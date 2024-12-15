@@ -1,41 +1,62 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './Register.css'; // Custom CSS
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "./Register.css"; // Custom CSS
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function RegisterPage() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    role: 'teacher',
-    password: '',
-    confirmPassword: '',
+    name: "",
+    email: "",
+    phone: "",
+    role: "teacher",
+    password: "",
+    confirmPassword: "",
   });
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setSuccess('');
+    setError("");
+    setSuccess("");
 
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+    if (!validateEmail(formData.email)) {
+      setError("Invalid email format.");
       return;
     }
 
+    if (!/^\d{10}$/.test(formData.phone)) {
+      setError("Phone number must be 10 digits.");
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    setLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/auth/register', formData);
-      setSuccess('User registered successfully!');
-      setTimeout(() => (window.location.href = '/login'), 2000);
-    } catch (error) {
-      setError('Registration failed. Please try again.');
+      await axios.post("http://localhost:5000/api/auth/register", formData);
+      setSuccess("User registered successfully! Redirecting to login...");
+      setTimeout(() => (window.location.href = "/login"), 2000);
+    } catch (err) {
+      const errorMessage = err.response?.data?.message || "Registration failed. Please try again.";
+      setError(errorMessage);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -82,9 +103,23 @@ function RegisterPage() {
             value={formData.phone}
             onChange={handleChange}
             placeholder="Enter your phone number"
-            pattern="^[0-9]{10}$"
+            pattern="\d{10}"
             required
           />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Role</label>
+          <select
+            name="role"
+            className="form-control"
+            value={formData.role}
+            onChange={handleChange}
+            required
+          >
+            <option value="teacher">Teacher</option>
+            <option value="admin">Admin</option>
+          </select>
         </div>
 
         <div className="mb-3">
@@ -113,7 +148,9 @@ function RegisterPage() {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary w-100">Register</button>
+        <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+          {loading ? "Registering..." : "Register"}
+        </button>
 
         <p className="mt-3 text-center">
           Already have an account? <a href="/login">Login here</a>

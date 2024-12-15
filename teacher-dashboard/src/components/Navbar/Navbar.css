@@ -39,6 +39,18 @@
     text-decoration: none;
     font-size: 1rem;
   }
+
+  .logout-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
   
   .navbar-link:hover {
     text-decoration: underline;

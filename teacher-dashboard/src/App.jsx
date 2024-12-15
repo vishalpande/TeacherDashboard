@@ -7,6 +7,7 @@ import AddStudent from './pages/AddStudent/AddStudent';
 import ListStudents from './pages/ListStudents/ListStudents';
 import AttendancePage from './pages/Attendence/AttendancePage';
 import CheckAttendence from './pages/CheckAttendence/CheckAttendence';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
@@ -14,19 +15,54 @@ function App() {
       <Routes>
         {/* Redirect root to login */}
         <Route path="/" element={<Navigate to="/login" />} />
-        
-        {/* Authentication Routes */}
+
+        {/* Public Routes */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
         {/* Protected Routes */}
-        <Route path="/dashboard" element={<Dashboard />} />
-      
-        <Route path="/add-student" element={<AddStudent />} />
-        <Route path="/list-students" element={<ListStudents />} />
-<Route path="/check-attendance" element={<AttendancePage />} />
-        <Route path="/attendance" element={<CheckAttendence />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/add-student"
+          element={
+            <PrivateRoute>
+              <AddStudent />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/list-students"
+          element={
+            <PrivateRoute>
+              <ListStudents />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/check-attendance"
+          element={
+            <PrivateRoute>
+              <AttendancePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/attendance"
+          element={
+            <PrivateRoute>
+              <CheckAttendence />
+            </PrivateRoute>
+          }
+        />
 
+        {/* 404 Route */}
         <Route path="*" element={<h1>404 - Page Not Found</h1>} />
       </Routes>
     </Router>
